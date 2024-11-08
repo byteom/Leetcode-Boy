@@ -6,6 +6,7 @@ This repository contains solutions to various coding problems with detailed expl
 
 ## Table of Contents
 - [2275. Largest Combination With Bitwise AND Greater Than Zero](#2275-largest-combination-with-bitwise-and-greater-than-zero)
+- [1829. Maximum XOR for Each Query](#1829-maximum-xor-for-each-query)
 - [Future Problems](#future-problems)
 
 ---
@@ -34,3 +35,33 @@ class Solution {
     return ans;
   }
 };
+
+```
+---
+
+###1829. Maximum XOR for Each Query
+
+### Solution Explanation
+
+```cpp
+
+class Solution {
+ public:
+  vector<int> getMaximumXor(vector<int>& nums, int maximumBit) {
+    const int mx = (1 << maximumBit) - 1;
+    vector<int> ans;
+    int xors = 0;
+
+    for (const int num : nums) {
+      xors ^= num;
+      ans.push_back(xors ^ mx);
+    }
+
+    ranges::reverse(ans);
+    return ans;
+  }
+};
+
+```
+
+---
