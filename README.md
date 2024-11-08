@@ -39,7 +39,7 @@ class Solution {
 ```
 ---
 
-###1829. Maximum XOR for Each Query
+### 1829. Maximum XOR for Each Query
 
 ### Solution Explanation
 
