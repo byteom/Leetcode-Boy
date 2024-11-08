@@ -1,0 +1,57 @@
+### 2275. Largest Combination With Bitwise AND Greater Than Zero
+
+ 
+#### Solution Explanation
+
+```cpp
+class Solution {
+ public:
+  int largestCombination(vector<int>& candidates) {
+    constexpr int kMaxBit = 24;
+    int ans = 0;
+
+    for (int i = 0; i < kMaxBit; ++i) {
+      int count = 0;
+      for (const int candidate : candidates)
+        if (candidate >> i & 1)
+          ++count;
+      ans = max(ans, count);
+    }
+
+    return ans;
+  }
+};
+```
+
+#### Steps of the Solution
+
+1. **Initialize Constants and Variables**:
+   - `kMaxBit`: Represents the number of bits to check. In this case, we assume the largest integer in `candidates` can be represented with 24 bits.
+   - `ans`: Holds the maximum count of `1`s found in any bit position across all numbers.
+
+2. **Iterate Over Each Bit Position**:
+   - We iterate from `i = 0` to `kMaxBit - 1`, checking each bit position individually.
+
+3. **Count `1`s at Each Bit Position**:
+   - For each bit position `i`, initialize `count` to zero.
+   - Traverse through each number in `candidates`:
+     - If the `i`-th bit of `candidate` is `1`, increment `count`.
+     - The expression `(candidate >> i) & 1` shifts the `candidate` right by `i` bits and checks if the resulting last bit is `1`.
+   - This counts how many numbers have a `1` at the `i`-th bit position.
+
+4. **Update the Answer**:
+   - After counting the `1`s for the current bit position `i`, update `ans` with the maximum value between `ans` and `count`.
+   - This ensures `ans` always contains the maximum number of numbers that share a `1` at any single bit position.
+
+5. **Return the Result**:
+   - Finally, return `ans`, which represents the largest count of numbers that can form a combination with a bitwise AND greater than zero.
+
+#### Explanation of the Bitwise AND Condition
+
+The bitwise AND operation will yield a non-zero result if there is at least one bit position where all numbers in a subset have a `1`. By counting the maximum number of `1`s in any single bit position, we identify the largest subset of numbers that can contribute to a non-zero bitwise AND result.
+
+#### Complexity Analysis
+
+- **Time Complexity**: `O(n * kMaxBit)`, where `n` is the number of elements in `candidates`, and `kMaxBit` is 24. The complexity arises because we check each of the 24 bits for each number in the list.
+- **Space Complexity**: `O(1)`, since we only use a fixed amount of extra space for variables like `ans` and `count`.
+ 
